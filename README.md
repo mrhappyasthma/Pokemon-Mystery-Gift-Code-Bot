@@ -24,7 +24,7 @@ Code givewaway URL: https://www.game.co.uk/webapp/wcs/stores/servlet/HubArticleV
 
 ### Prerequisites
 
-This script takes advantage of the plus-code trick for gmail. It's also recommended to use a fresh gmail account to avoid risk of blacklisting and to make it easier to parse after the fact.
+This script takes advantage of the [plus-code trick](https://gmail.googleblog.com/2008/03/2-hidden-ways-to-get-more-from-your.html) for gmail. It's also recommended to use a fresh gmail account to avoid risk of blacklisting and to make it easier to parse after the fact.
 
 ### Dependencies
 
