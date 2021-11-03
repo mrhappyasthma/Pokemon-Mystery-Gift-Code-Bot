@@ -118,10 +118,14 @@ for s in iter_all_strings():
   # join the url with the action (form request URL)
   url = urljoin(URL, target_form["action"])
 
-  if form_details["method"] == "post":
-    res = session.post(url, data=data)
-  elif form_details["method"] == "get":
-    res = session.get(url, params=data)
+  try:
+    if form_details["method"] == "post":
+      res = session.post(url, data=data)
+    elif form_details["method"] == "get":
+      res = session.get(url, params=data)
+  except:
+    print('Could not submit form', flush=True)
+    continue
 
   # the below code is only for replacing relative URLs to absolute ones
   soup = BeautifulSoup(res.content, "html.parser")
