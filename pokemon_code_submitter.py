@@ -3,10 +3,19 @@ import itertools
 from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 from urllib.parse import urljoin
+import random
 import time
 import sys
 
 URL = 'https://www.game.co.uk/webapp/wcs/stores/servlet/HubArticleView?hubId=2837253&articleId=2837253&catalogId=10201&langId=44&storeId=10151&utm_source=Twitter&utm_medium=Organic'
+
+USER_AGENT_LIST = [
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Safari/605.1.15',
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:77.0) Gecko/20100101 Firefox/77.0',
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
+]
 
 def iter_all_strings():
     for size in itertools.count(1):
@@ -78,7 +87,11 @@ for s in iter_all_strings():
   print('Submitting for email: ' + email, flush=True)
 
   # initialize an HTTP session
+  user_agent = random.choice(USER_AGENT_LIST)
   session = HTMLSession()
+  session.headers.update({
+    'User-Agent' : user_agent
+  })
   forms = get_all_forms(session, URL)
   if not forms:
     continue;
